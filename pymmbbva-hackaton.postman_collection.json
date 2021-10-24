@@ -1,0 +1,361 @@
+{
+	"info": {
+		"_postman_id": "7973543a-c8a0-4e79-ab1a-e4d82e205dd0",
+		"name": "pymmbbva-hackaton",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Send SMS Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{aws}}/pymesbbva/api/v1/sms/token/send/51922480953",
+					"protocol": "http",
+					"host": [
+						"{{aws}}"
+					],
+					"path": [
+						"pymesbbva",
+						"api",
+						"v1",
+						"sms",
+						"token",
+						"send",
+						"51922480953"
+					],
+					"query": [
+						{
+							"key": "asd",
+							"value": "asda",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validar SMS Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{aws}}/pymesbbva/api/v1/sms/token/validate/b22b",
+					"protocol": "http",
+					"host": [
+						"{{aws}}"
+					],
+					"path": [
+						"pymesbbva",
+						"api",
+						"v1",
+						"sms",
+						"token",
+						"validate",
+						"b22b"
+					],
+					"query": [
+						{
+							"key": "asd",
+							"value": "asda",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Solicitud y Crear PDF",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cartaPoderEstado\": \"string\",\r\n  \"cartaPoderPoderdante\": \"string\",\r\n  \"clienteEmpresaDireccionFiscal\": \"string\",\r\n  \"clienteEmpresaEstado\": \"string\",\r\n  \"clienteEmpresaFechaInicioActividades\": \"string\",\r\n  \"clienteEmpresaGerenteAdministrativo\": \"string\",\r\n  \"clienteEmpresaGerenteGeneral\": \"string\",\r\n  \"clienteEmpresaNivelCalificacion\": \"string\",\r\n  \"clienteEmpresaRazonSocial\": \"string\",\r\n  \"clienteEmpresaRubro\": \"string\",\r\n  \"dni\": \"string\",\r\n  \"producto\": \"string\",\r\n  \"representanteLegalApellidos\": \"string\",\r\n  \"representanteLegalEdad\": 0,\r\n  \"representanteLegalEstadoCivil\": \"string\",\r\n  \"representanteLegalNombres\": \"string\",\r\n  \"representanteLegalSexo\": \"string\",\r\n  \"representanteLegalTipo\": \"string\",\r\n  \"ruc\": \"string\",\r\n  \"tipoServicio\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{aws}}/pymesbbva/api/v1/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{aws}}"
+					],
+					"path": [
+						"pymesbbva",
+						"api",
+						"v1",
+						"solicitudes"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Firmar PDF",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{aws}}/pymesbbva/api/v1/sign/bbva-db378ed6-6fac-413b-999d-9b0a794a8bde.pdf",
+					"protocol": "http",
+					"host": [
+						"{{aws}}"
+					],
+					"path": [
+						"pymesbbva",
+						"api",
+						"v1",
+						"sign",
+						"bbva-db378ed6-6fac-413b-999d-9b0a794a8bde.pdf"
+					],
+					"query": [
+						{
+							"key": "asd",
+							"value": "asda",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Email",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "pdf-url",
+						"value": "https://pymesbbva.s3.sa-east-1.amazonaws.com/signed-pdfs/bbva-db378ed6-6fac-413b-999d-9b0a794a8bde-signed.pdf",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{aws}}/pymesbbva/api/v1/email/miguel.martinez.mora@bbva.com",
+					"protocol": "http",
+					"host": [
+						"{{aws}}"
+					],
+					"path": [
+						"pymesbbva",
+						"api",
+						"v1",
+						"email",
+						"miguel.martinez.mora@bbva.com"
+					],
+					"query": [
+						{
+							"key": "asd",
+							"value": "asda",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Solicitud",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cartaPoderEstado\": \"string\",\r\n  \"cartaPoderPoderdante\": \"string\",\r\n  \"clienteEmpresaDireccionFiscal\": \"string\",\r\n  \"clienteEmpresaEstado\": \"string\",\r\n  \"clienteEmpresaFechaInicioActividades\": \"string\",\r\n  \"clienteEmpresaGerenteAdministrativo\": \"string\",\r\n  \"clienteEmpresaGerenteGeneral\": \"string\",\r\n  \"clienteEmpresaNivelCalificacion\": \"string\",\r\n  \"clienteEmpresaRazonSocial\": \"string\",\r\n  \"clienteEmpresaRubro\": \"string\",\r\n  \"dni\": \"string\",\r\n  \"producto\": \"string\",\r\n  \"representanteLegalApellidos\": \"string\",\r\n  \"representanteLegalEdad\": 0,\r\n  \"representanteLegalEstadoCivil\": \"string\",\r\n  \"representanteLegalNombres\": \"string\",\r\n  \"representanteLegalSexo\": \"string\",\r\n  \"representanteLegalTipo\": \"string\",\r\n  \"ruc\": \"string\",\r\n  \"tipoServicio\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{aws}}/pymesbbva/api/v1/solicitudes/string-string",
+					"protocol": "http",
+					"host": [
+						"{{aws}}"
+					],
+					"path": [
+						"pymesbbva",
+						"api",
+						"v1",
+						"solicitudes",
+						"string-string"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Carta Poder",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cartaPoderEstado\": \"string\",\r\n  \"cartaPoderPoderdante\": \"string\",\r\n  \"clienteEmpresaDireccionFiscal\": \"string\",\r\n  \"clienteEmpresaEstado\": \"string\",\r\n  \"clienteEmpresaFechaInicioActividades\": \"string\",\r\n  \"clienteEmpresaGerenteAdministrativo\": \"string\",\r\n  \"clienteEmpresaGerenteGeneral\": \"string\",\r\n  \"clienteEmpresaNivelCalificacion\": \"string\",\r\n  \"clienteEmpresaRazonSocial\": \"string\",\r\n  \"clienteEmpresaRubro\": \"string\",\r\n  \"dni\": \"string\",\r\n  \"producto\": \"string\",\r\n  \"representanteLegalApellidos\": \"string\",\r\n  \"representanteLegalEdad\": 0,\r\n  \"representanteLegalEstadoCivil\": \"string\",\r\n  \"representanteLegalNombres\": \"string\",\r\n  \"representanteLegalSexo\": \"string\",\r\n  \"representanteLegalTipo\": \"string\",\r\n  \"ruc\": \"string\",\r\n  \"tipoServicio\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{aws}}/pymesbbva/api/v1/cartas-poder/58469932",
+					"protocol": "http",
+					"host": [
+						"{{aws}}"
+					],
+					"path": [
+						"pymesbbva",
+						"api",
+						"v1",
+						"cartas-poder",
+						"58469932"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Representante Legal",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cartaPoderEstado\": \"string\",\r\n  \"cartaPoderPoderdante\": \"string\",\r\n  \"clienteEmpresaDireccionFiscal\": \"string\",\r\n  \"clienteEmpresaEstado\": \"string\",\r\n  \"clienteEmpresaFechaInicioActividades\": \"string\",\r\n  \"clienteEmpresaGerenteAdministrativo\": \"string\",\r\n  \"clienteEmpresaGerenteGeneral\": \"string\",\r\n  \"clienteEmpresaNivelCalificacion\": \"string\",\r\n  \"clienteEmpresaRazonSocial\": \"string\",\r\n  \"clienteEmpresaRubro\": \"string\",\r\n  \"dni\": \"string\",\r\n  \"producto\": \"string\",\r\n  \"representanteLegalApellidos\": \"string\",\r\n  \"representanteLegalEdad\": 0,\r\n  \"representanteLegalEstadoCivil\": \"string\",\r\n  \"representanteLegalNombres\": \"string\",\r\n  \"representanteLegalSexo\": \"string\",\r\n  \"representanteLegalTipo\": \"string\",\r\n  \"ruc\": \"string\",\r\n  \"tipoServicio\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{aws}}/pymesbbva/api/v1/representantes-legales/72777438",
+					"protocol": "http",
+					"host": [
+						"{{aws}}"
+					],
+					"path": [
+						"pymesbbva",
+						"api",
+						"v1",
+						"representantes-legales",
+						"72777438"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cliente Empresa",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cartaPoderEstado\": \"string\",\r\n  \"cartaPoderPoderdante\": \"string\",\r\n  \"clienteEmpresaDireccionFiscal\": \"string\",\r\n  \"clienteEmpresaEstado\": \"string\",\r\n  \"clienteEmpresaFechaInicioActividades\": \"string\",\r\n  \"clienteEmpresaGerenteAdministrativo\": \"string\",\r\n  \"clienteEmpresaGerenteGeneral\": \"string\",\r\n  \"clienteEmpresaNivelCalificacion\": \"string\",\r\n  \"clienteEmpresaRazonSocial\": \"string\",\r\n  \"clienteEmpresaRubro\": \"string\",\r\n  \"dni\": \"string\",\r\n  \"producto\": \"string\",\r\n  \"representanteLegalApellidos\": \"string\",\r\n  \"representanteLegalEdad\": 0,\r\n  \"representanteLegalEstadoCivil\": \"string\",\r\n  \"representanteLegalNombres\": \"string\",\r\n  \"representanteLegalSexo\": \"string\",\r\n  \"representanteLegalTipo\": \"string\",\r\n  \"ruc\": \"string\",\r\n  \"tipoServicio\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{aws}}/pymesbbva/api/v1/clientes/20728444182",
+					"protocol": "http",
+					"host": [
+						"{{aws}}"
+					],
+					"path": [
+						"pymesbbva",
+						"api",
+						"v1",
+						"clientes",
+						"20728444182"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
