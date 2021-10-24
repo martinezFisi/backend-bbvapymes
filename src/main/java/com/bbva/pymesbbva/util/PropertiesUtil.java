@@ -24,9 +24,6 @@ public class PropertiesUtil {
     @Value("${api.infobip.sms.from}")
     public String API_INFOBIP_SMS_FROM;
 
-    @Value("${api.infobip.sms.template.token}")
-    public String API_INFOBIP_SMS_TEMPLATE_TOKEN;
-
     @Value("${email.sender}")
     public String EMAIL_SENDER;
 
@@ -35,6 +32,9 @@ public class PropertiesUtil {
 
     @Value("${email.subject}")
     public String EMAIL_SUBJECT;
+
+    @Value("${email.message}")
+    public String EMAIL_MESSAGE;
 
     @Value("${amazon.s3.url}")
     public String AMAZON_S3_URL;
@@ -65,6 +65,9 @@ public class PropertiesUtil {
 
     @Value("${pdfs.signed.directory}")
     public String PDFS_SIGNED_DIRECTORY;
+
+    @Value("${amazon.s3.utils.bbva-logo}")
+    public String AMAZON_S3_UTILS_BBVA_LOGO;
 
     @PostConstruct
     private void postConstruct() {

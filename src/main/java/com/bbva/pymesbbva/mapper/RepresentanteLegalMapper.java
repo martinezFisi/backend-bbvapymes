@@ -16,6 +16,7 @@ public class RepresentanteLegalMapper {
                 .edad(representanteLegalEntity.getEdad())
                 .sexo(representanteLegalEntity.getSexo())
                 .direccion(representanteLegalEntity.getDireccion())
+                .tipo(representanteLegalEntity.getTipo())
                 .build();
     }
 

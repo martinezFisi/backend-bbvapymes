@@ -33,5 +33,7 @@ public class RepresentanteLegalEntity {
     private String sexo;
     @Column(name = "DIRECCION")
     private String direccion;
+    @Column(name = "TIPO")
+    private String tipo;
 
 }

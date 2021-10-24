@@ -23,7 +23,7 @@ public class EmailSender {
         this.propertiesUtil = propertiesUtil;
     }
 
-    public String sendEmail(String emailReceptor, String messageBody) {
+    public boolean sendEmail(String emailReceptor, String pdfUrl) {
         //Mail
         Session session;
         //Conjunto de valores necesarios para la conexión
@@ -60,7 +60,7 @@ public class EmailSender {
 
             //Mensaje de texto
             BodyPart texto = new MimeBodyPart();
-            texto.setText(messageBody);
+            texto.setText(propertiesUtil.EMAIL_MESSAGE.concat(pdfUrl));
 
             MimeMultipart multiparte = new MimeMultipart();
             multiparte.addBodyPart(texto);
@@ -78,10 +78,10 @@ public class EmailSender {
             //Cerrar conexion
             t.close();
 
-            return "Sended succesfully";
+            return true;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return e.getMessage();
+            return false;
         }
 
     }

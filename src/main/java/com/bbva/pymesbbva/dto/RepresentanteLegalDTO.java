@@ -14,5 +14,6 @@ public class RepresentanteLegalDTO {
     private Integer edad;
     private String sexo;
     private String direccion;
+    private String tipo;
 
 }

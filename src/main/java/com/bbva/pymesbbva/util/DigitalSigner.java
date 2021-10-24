@@ -1,6 +1,7 @@
 package com.bbva.pymesbbva.util;
 
 import com.bbva.pymesbbva.client.AmazonS3Client;
+import com.bbva.pymesbbva.dto.PDFGeneratedDTO;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfSignatureAppearance;
 import com.itextpdf.text.pdf.PdfStamper;
@@ -26,7 +27,7 @@ public class DigitalSigner {
         this.propertiesUtil = propertiesUtil;
     }
 
-    public String sign(String pdfName) {
+    public PDFGeneratedDTO sign(String pdfName) {
         try{
             var pdfDirectory = propertiesUtil.AMAZON_S3_URL.concat(propertiesUtil.PDFS_DIRECTORY);
             var certificateDirectory = propertiesUtil.AMAZON_S3_URL.concat(propertiesUtil.DIGITAL_SIGN_CERTIFICATE);
@@ -54,14 +55,20 @@ public class DigitalSigner {
             signatureAppearance.setReason("Firma PKCS12");
             signatureAppearance.setLocation("HACKATON BBVA, LIMA PERU");
 
-            signatureAppearance.setVisibleSignature(new com.itextpdf.text.Rectangle(200, 340, 30, 20), 1, null);
+            signatureAppearance.setVisibleSignature(new com.itextpdf.text.Rectangle(100, 100, 30, 20), 1, null);
             pdfStamper.close();
 
             var inputStream = new FileInputStream(signedPDFName);
-            return amazonS3Client.uploadFile(propertiesUtil.PDFS_SIGNED_DIRECTORY.concat(signedPDFName), inputStream);
+            amazonS3Client.uploadFile(propertiesUtil.PDFS_SIGNED_DIRECTORY.concat(signedPDFName), inputStream);
+
+            return PDFGeneratedDTO.builder()
+                    .pdfURL(propertiesUtil.AMAZON_S3_URL.concat(propertiesUtil.PDFS_SIGNED_DIRECTORY).concat(signedPDFName))
+                    .pdfName(signedPDFName)
+                    .message("success")
+                    .build();
         } catch(Exception e) {
             log.error(e.getMessage(), e);
-            return e.getMessage();
+            return PDFGeneratedDTO.builder().message(e.getMessage()).build();
         }
     }
 

@@ -1,28 +1,33 @@
 package com.bbva.pymesbbva.controller;
 
-import com.bbva.pymesbbva.client.SMSInfobipClient;
+import com.bbva.pymesbbva.service.SolicitudService;
 import com.bbva.pymesbbva.util.DigitalSigner;
 import com.bbva.pymesbbva.util.EmailSender;
 import com.bbva.pymesbbva.util.PDFGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bbva.pymesbbva.util.PropertiesUtil;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "/api/v1/send/pdf/signed")
 public class HelloController {
 
-    private final SMSInfobipClient smsInfobipClient;
-    private final EmailSender emailSender;
+    private final SolicitudService solicitudService;
+    private final PropertiesUtil propertiesUtil;
     private final PDFGenerator pdfGenerator;
     private final DigitalSigner digitalSigner;
+    private final EmailSender emailSender;
 
-    @Autowired
-    public HelloController(SMSInfobipClient smsInfobipClient, EmailSender emailSender, PDFGenerator pdfGenerator, DigitalSigner digitalSigner) {
-        this.smsInfobipClient = smsInfobipClient;
-        this.emailSender = emailSender;
+    public HelloController(SolicitudService solicitudService, PropertiesUtil propertiesUtil, PDFGenerator pdfGenerator, DigitalSigner digitalSigner, EmailSender emailSender) {
+        this.solicitudService = solicitudService;
+        this.propertiesUtil = propertiesUtil;
         this.pdfGenerator = pdfGenerator;
         this.digitalSigner = digitalSigner;
+        this.emailSender = emailSender;
     }
 
     @GetMapping("/hello")
@@ -30,24 +35,16 @@ public class HelloController {
         return "Hello Hackaton - App initialized!!";
     }
 
-    @GetMapping("/sms")
-    public String sms(@RequestParam(name = "receptor") String receptor, @RequestParam(name = "message") String message) {
-        var responseEntity = smsInfobipClient.sendSms(receptor, "BBVA PERU", message);
-        return responseEntity.getStatusCodeValue() + " - " + responseEntity.getBody();
+    @PostMapping(value = "{email}")
+    public ResponseEntity<Void> enviarPDF(@PathVariable String email){
+        var solicitudDTO = solicitudService.findById("20728444182-72777438");
+
+        var pdfGeneratedDTO = pdfGenerator.generatePDF(solicitudDTO);
+        var pdfGeneratedDTO2 = digitalSigner.sign(pdfGeneratedDTO.getPdfName());
+
+        emailSender.sendEmail(email, pdfGeneratedDTO2.getPdfURL());
+
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/email")
-    public String email(@RequestParam(name = "receptor") String receptor, @RequestParam(name = "message") String message) {
-        return emailSender.sendEmail(receptor, message);
-    }
-
-    @GetMapping("/pdf")
-    public String pdf(@RequestParam(name = "text") String text) {
-        return pdfGenerator.generatePDF(text);
-    }
-
-    @GetMapping("/sign")
-    public String sign(@RequestParam(name = "pdfName") String pdfName) {
-        return digitalSigner.sign(pdfName);
-    }
 }

@@ -31,12 +31,12 @@ public class SMSInfobipClient {
         this.propertiesUtil = propertiesUtil;
     }
 
-    public ResponseEntity<String> sendSms(String sendTo, String subject, String message) {
+    public ResponseEntity<String> sendSms(String sendTo, String message) {
         var httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(APPLICATION_JSON);
         httpHeaders.set("Authorization", "App ".concat(propertiesUtil.API_INFOBIP_API_KEY));
 
-        var requestSmsInfobipDto = buildRequest(sendTo, subject, message);
+        var requestSmsInfobipDto = buildRequest(sendTo, propertiesUtil.API_INFOBIP_SMS_FROM, message);
         log.info("Request SMS: {}", requestSmsInfobipDto);
 
         var httpEntity = new HttpEntity<>(requestSmsInfobipDto, httpHeaders);
